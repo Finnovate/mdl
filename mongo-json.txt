@@ -1,0 +1,72 @@
+investidor = {
+	"idInvestidor": <integer>,
+	"username": "<string>",
+	...,
+	"perfil": {
+		"idPerfil": <integer>
+	}
+}
+
+perfil =
+{
+	"idPerfil": <integer>,
+	"nome": <string>
+	"recomendacoes": [
+		{
+			"tipoInvestimento": {
+				"idTipoInvestimento": <integer>
+			},
+			"percentualMinimo": <float>,
+			"percentualMaximo": <float>
+		}
+	],
+}
+
+carteiraInvestimentos =
+{
+	"idCarteira": <integer>,
+	"investidor"{
+		"idInvestidor": <integer>
+	},
+	"produtos": [
+		{
+			"produto": {
+				"idProduto": <integer>
+			}
+		},
+		{
+			"produto": {
+				"idProduto": <integer>
+			}
+		},
+	]
+	...,
+	"simulacoes": [
+		{
+			"timestamp": "<string>" ,
+			"produtos": [
+				{
+					"produto": {
+						"idProduto": <integer>
+					},
+					"data": "<string>",
+					"valorFuturoEstimado": <double>,
+					"rentabilidadeEstimada": <float>
+				},
+				{
+					"produto": {
+						"idProduto": <integer>
+					},
+					"data": "<string>",
+					"valorFuturoEstimado": <double>,
+					"rentabilidadeEstimada": <float>
+				}
+			]
+		}
+	],
+}
+
+Frameworks:
+- Apresentação: Angular Material
+- Persistência: MongoDB
+- Lógica: ??? Node.js
