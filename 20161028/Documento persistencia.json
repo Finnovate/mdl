@@ -1,0 +1,91 @@
+{
+	Investidor {
+		"nome": "Alberto de Souza",
+		"username": "AlbSouza",
+		"password": "p@ssw0rd",
+		"email": "AlbsSouza@terra.com.br"
+			Perfil{
+				"id": 25
+			}
+	}
+}
+
+{
+	Perfil {
+		"id" = 25,
+		"nome": "Conservador",
+		"descrição": "Focado em produtos de renda fixa, sem risco",
+		"percentualRendaFixa": 90,
+		"percentualRendaVariável": 10
+	}
+}
+
+{
+	PerguntaQuestionário {
+		"pergunta1": "ExemploPergunta",
+		"pergunta2": "ExemploPergunta",
+		"pergunta3": "ExemploPergunta",
+		"pergunta4": "ExemploPergunta",
+		"pergunta5": "ExemploPergunta"
+	}
+}
+
+{
+	CarteiraInvestimento {
+		"idCarteira": 5,
+		"idInvestidor": 25,
+			Produto{
+				"idProduto" = 10
+			}
+			Produto{
+				"idProduto" = 15
+			}
+	}
+}
+
+
+{
+	Produto {
+		"idProduto": 10,
+	}
+}
+
+{
+	ProdutoRendaFixa{
+		"idProduto": 10,
+		"risco" : "Baixo",
+		"rentabilidadeMensal" : 0.5,
+		"investimentoMinimo" : 1000,
+		"tempoMinimoDeInvestimento" : 30,
+		"tempoMaxDeInvestimento" : 0,
+		"taxaCorretagem" : 0.1,
+		"porcentagemCDI" : 95,
+		"tipoInvetimento" : "LCI",
+		"emissor" : "Banco do Brasil",
+		"porcentagemImposto" : 0
+	}
+}
+
+{
+	ProdutoRendaVariavel{
+		"idProduto": 532,
+		"risco" : "Moderado",
+		"rentabilidadeMensal" : 1.8,
+		"investimentoMinimo" : 3000,
+		"tempoMinimoDeInvestimento" : 25,
+		"tempoMaxDeInvestimento" : 0,
+		"taxaCorretagem" : 0.1,
+		"porcentagemCDI" : 0,
+		"tipoInvetimento" : "Fundo de renda variavel",
+		"emissor" : "Geracao Futuro",
+		"porcentagemImposto" : 1.6
+	}
+}
+
+{
+	simulacaoCarteira {
+		"idSimulacao": 123
+		"idCarteira": 5,
+		"rentabilidadeTotal": 10
+	}
+}
