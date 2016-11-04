@@ -1,23 +1,18 @@
-investidor = {
+
+
+investidor = { //como fica o timestamp das respostas aqui dentro?
 	"idInvestidor": <integer>,
-	"username": "<string>",
-	...,
+	"username": <string>,
+	"password": <string>,
+	"email": <string>,
+	"nome": <string>,
 	"perfil": {
 		"idPerfil": <integer>
 	},
-	"carteiras":[ // se no esquema conceitual for uma agregação
+	"perguntaQuestionario":[
 		{
-			"idCarteira":<integer>
-		},
-		{
-			"idCarteira":<integer>
-		},
-		...
-	]
-	"questionarios":[
-		{
-			"idQuestionario":<integer>,
-			"timestamp":<string>,
+			"idInvestidor":<integer>,
+			"idPergunta":<string>,
 			"respostas":[
 				{
 					"idPergunta":<integer>,
@@ -39,33 +34,30 @@ investidor = {
 perfil =
 {
 	"idPerfil": <integer>,
-	"nome": <string>
+	"nome": <string>,
+	"descricao":<string>,
 	"recomendacoes": [
 		{
-			"tipoInvestimento": {
-				"idTipoInvestimento": <integer>
-			},
-			"percentualMinimo": <float>,
-			"percentualMaximo": <float>
+			"percentualMinimoRF": <float>,
+			"percentualMaximoRF": <float>,
+			"percentualMinimoRV": <float>,
+			"percentualMaximoRV": <float>
 		},
-		{
-			"tipoInvestimento": {
-				"idTipoInvestimento": <integer>
-			},
-			"percentualMinimo": <float>,
-			"percentualMaximo": <float>
-		},
-		...
 	],
+	"tipoInvestimento": {
+		{
+				"idTipoInvestimento": <integer>
+		}
+    }
 }
 
-carteiraInvestimentos =
+carteiraInvestimentos = //trocar pra simulacao só apontar pra um idCarteira em vez de ter os produtos dentro - acho que sai toda a simulacao e a simulacao que aponta
 {
 	"idCarteira": <integer>,
-	"investidor":{ // se no esquema conceitual não for uma agregação
+	"investidor":{ 
 		"idInvestidor": <integer>
 	},
-	"produtos": [
+	"produto": [
 		{
 			"produto": {
 				"idProduto": <integer>
@@ -78,10 +70,10 @@ carteiraInvestimentos =
 		},
 	]
 	...,
-	"simulacoes": [
+	"simulacaoCarteira": [ //trocar baseado nas trocas do simulacaoCarteira
 		{
 			"timestamp": "<string>" ,
-			"produtos": [
+			"produtos": [ //investimento aqui dentro?
 				{
 					"produto": {
 						"idProduto": <integer>
@@ -103,73 +95,182 @@ carteiraInvestimentos =
 	]
 }
 
+simulacaoCarteira={//ta errado no conceitual, como fica?
+	"rentabilidadeTotal": <integer>,
+	"timestamp": <Date>
+}
+
 questionario=
 {
 	"idQuestionario":<integer>,
-	"perguntas": [
-		{
-			"idPergunta":<integer>,
-			"enunciado":<string>,
-			"tipo":<string>,
-			"opcoes":[
-				{
-					"idOpcao":<integer>,
-					"texto":<string>
-				},
-				...
-			]
-		},
-		{
-			"idPergunta":<integer>,
-			"enunciado":<string>,
-			"tipo":<string>,
-			"valorMinimo":<integer>,
-			"valorMaximo":<integer>
-		},
-		...
-	]
+	"enunciado": <string>,
+	"pergunta": {
+		"idPergunta": <integer>
+	}
 }
 
-
-
-
-Frameworks:
-- Apresentação: Angular Material
-- Persistência: MongoDB
-- Lógica: ??? Node.js
-
-
-
+perguntaQuestionario=
 {
-	"percentualRendaFixaConservador":<float>,
-	"percentualRendaFixaModerado":<float>,
-	"percentualRendaFixaAgressivo":<float>,
-	"percentualRendaVariavelConservador":<float>,
-	"percentualRendaVariavelModerado":<float>,
-	"percentualRendaVariavelAgressivo":<float>
+	"idPergunta": <integer>,
+	"enunciado": <string>,
+	"tipo": <string>
+}
+
+resposta= //coloco as generalizadas dentro? 
+{
+	"idInvestidor": <integer>,
+	"perguntaQuestionario": {
+		"idPergunta": <integer>
+	},
+	"timestamp": <Date> //aqui?
+}
+
+opcao = {
+	"idOpcao": <integer>
+	"textoOpcao": <string>
+}
+
+recomendacoes = {
+	"percentualMinimoRF": <float>,
+	"percentualMaximoRF": <float>,
+	"percentualMinimoRV": <float>,
+	"percentualMaximoRV": <float>
+}
+
+emissor = { //vai ter algum ID?
+	"nome" : <string>
+}
+
+taxas = {
+ "valorCDI": <integer>,
+ "valorSelic": <integer>,
+ "valorTR": <integer>
+}
+
+meses = {
+	"idMes": <integer>,
+	"nomeMes": <String>
+}
+
+rentabilidadeMensal = {
+	"valorRentabilidade": <integer>,
+	"mes": {
+		"idMes": <integer>
+	}
+}
+
+investimento = {
+	"produto": {
+		"idProduto": <integer>
+	},
+	"carteiraInvestimento"{
+		"idCarteira": <integer>
+	}
+	"percentualDoProdutoNaCarteira":<integer>
+}
+
+produtoRendaFixa = { 
+	"idProduto": <integer>,
+	"risco": <integer>,
+	"rentabilidadeMensal": <integer>,
+	"investimentoMinimo": <integer>,
+	"tempoMinimoDeInvestimento": <integer>,
+	"tempoMaximoDeInvestimento": <integer>,
+	"taxaCorretagem": <integer>,
+	"porcentagemCDI": <integer>,
+	"tipoInvestimento": <string>,
+	"emissor": <string>,
+	"porcentagemImposto": <int>
+}
+
+produtoRendaVariavel = { 
+	"idProduto": <integer>,
+	"risco": <integer>,
+	"rentabilidadeHistoricaAnual": <integer>,
+	"investimentoMinimo": <integer>,
+	"tempoMinimoDeInvestimento": <integer>,
+	"tempoMaximoDeInvestimento": <integer>,
+	"taxaCorretagem": <integer>,
+	"porcentagemCDI": <integer>,
+	"tipoInvestimento": <string>,
+	"emissor": <string>,
+	"porcentagemImposto": <int>
 	
 }
 
-X = 
-risco * P1 + 
-rentabilidadeAnual * P2 +
-...
+rentabilidadeHistorica = {
+	"idRentabilidadeHistorica": <integer>,
+	"produto":{
+		"idProduto": <integer>
+	},
+	"rentabilidadeMensal"[ //tem que terminar aqui, rentabilidade historica contem o rentabilidade mensal completo
+		{
+			"rentabilidadeMensal": {
+			"valorRentabilidade": <integer>
+			}
+			
+		}
+	]
+}
 
-Agressivo
-30% RF
-70% RV
+tipoInvestimento = {
+	"idTipoInvestimento": <integer>
+}
 
-100.000,00
+repostaEscalaValor ={
+	"investidor":{
+		"idInvestidor": <integer>
+	},
+	"pergunta":{
+		"idPergunta": <integer>
+	},
+	"valor": <integer>
+}
 
-RV
-X(XP) = 40.000,00
-X(Safra) = 10.000,00
-X(BB) = 10.000,00
-X(CEF) = 0.00
-X(Verde) = 10.000,00
+repostaTexto={
+	"investidor":{
+		"idInvestidor": <integer>
+	},
+	"pergunta":{
+		"idPergunta": <integer>
+	},
+	"resposta": <string>
+}
 
-RF
-X(XP) = 8.000,00
-X(Safra) = 22.000,00
+repostaEscolhaMultipla ={
+	"investidor":{
+		"idInvestidor": <integer>
+	},
+	"pergunta":{
+		"idPergunta": <integer>
+	},
+	"opcao": [
+		{
+			"opcao": {
+				"idOpcao": <integer>
+			}
+		},
+		{
+			"opcao": {
+				"idOpcao": <integer>
+			}
+		},
+	]
+}
+
+repostaEscolhaSimples ={
+	"investidor":{
+		"idInvestidor": <integer>
+	},
+	"pergunta":{
+		"idPergunta": <integer>
+	}
+
+	"opcao": {
+		"idOpcao": <integer>
+	}
+
+}
+
 
 
